@@ -10,6 +10,7 @@ import com.generation.todo.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +21,12 @@ class MainViewModel @Inject constructor
         MutableLiveData<retrofit2.Response<List<Categoria>>>()
     val respostaListCategoria: LiveData<retrofit2.Response<List<Categoria>>> =
         _respostaListCategoria
+    val dataChosen = MutableLiveData<LocalDate>()
+
+    init {
+        dataChosen.value = LocalDate.now()
+        listaCategoria()
+    }
 
     fun listaCategoria(){
         viewModelScope.launch {
